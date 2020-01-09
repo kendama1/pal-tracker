@@ -21,14 +21,14 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository{
     }
 
     public TimeEntry update(long id, TimeEntry timeEntry) {
-        TimeEntry update = create(timeEntry);
-        timeEntries.put(id, timeEntry);
-        if (id <= timeEntries.size() && id > 0) {
-            timeEntry.setId(id);
-            timeEntries.put(id, timeEntry);
-            return find(id);
-        }
-        return null;
+        timeEntries.replace(id, new TimeEntry(id, timeEntry.getProjectId(), timeEntry.getUserId(), timeEntry.getDate(), timeEntry.getHours()));
+        return find(id);
+//        if (id <= timeEntries.size() && id > 0) {
+//            timeEntry.setId(id);
+//            timeEntries.put(id, timeEntry);
+//            return find(id);
+//        }
+//        return null;
     }
 
     public List list() {

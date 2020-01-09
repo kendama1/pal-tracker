@@ -39,7 +39,7 @@ public class TimeEntryController {
     }
 
     @PutMapping("/time-entries/{timeEntryId}")
-    public ResponseEntity update(@PathVariable long timeEntryId, TimeEntry expected) {
+    public ResponseEntity update(@PathVariable long timeEntryId, @RequestBody TimeEntry expected) {
         TimeEntry updatedEntry = timeEntryRepository.update(timeEntryId, expected);
         if(updatedEntry == null){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
